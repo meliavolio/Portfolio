@@ -5,6 +5,10 @@ import './display-cards.css';
 import './editorial-pass.css';
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://meliavolio.netlify.app'),
+  alternates: {
+    canonical: '/',
+  },
   title: 'Melisa Avolio — Tecnología, comunicación, educación e IA',
   description: 'Portfolio de Melisa Avolio, periodista especializada en tecnología, comunicadora y formadora en inteligencia artificial.',
   openGraph: { title: 'Melisa Avolio — Tecnología, comunicación, educación e IA', description: 'Portfolio de Melisa Avolio, periodista especializada en tecnología, comunicadora y formadora en inteligencia artificial.', type: 'website', locale: 'es_AR' },

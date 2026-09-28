@@ -45,7 +45,7 @@ export function WorkTogether() {
       </div>
       <aside className="custom-invitation">
         <h3>¿Tenés otra idea en mente?<span aria-hidden="true">.</span></h3>
-        <div><p>Contame qué necesitás. Podemos pensar una propuesta a medida y, si creo que no soy la persona indicada para acompañarte, también te lo voy a decir.</p><a href="#contacto">Contame tu idea <span aria-hidden="true">→</span></a></div>
+        <div><p>Contame qué necesitás. Podemos explorar una propuesta a medida, una colaboración o una forma de llevar estas conversaciones a tu comunidad</p><a href="#contacto">Contame tu idea <span aria-hidden="true">→</span></a></div>
       </aside>
     </div>
   </section>;

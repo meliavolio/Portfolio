@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import { proposals } from '@/data/proposals';
 import { BudgetLink } from '@/components/BudgetLink';
+import { ProposalDetails } from '@/components/ProposalDetails';
 
 type Category = 'talleres' | 'comunicacion';
 const categories: Category[] = ['talleres', 'comunicacion'];
@@ -73,17 +74,7 @@ export function ProposalExplorer() {
                 });
               }}>Ver detalles<span aria-hidden="true">{open ? '−' : '+'}</span><span className="sr-only"> de {proposal.title}</span></button>
               <div id={id} className="proposal-full-details" hidden={!open}>
-                <p>{proposal.description}</p>
-                {workshop && <>
-                  <h4>Para quién</h4><p>{workshop.audience}</p>
-                  <h4>{workshop.topicsLabel}</h4>
-                  {workshop.steps.length ? <ol>{workshop.steps.map(step => <li key={step.title}><strong>{step.title}</strong> {step.text}</li>)}</ol> : <ul>{workshop.topics.map(topic => <li key={topic}>{topic}</li>)}</ul>}
-                  {workshop.care && <p>{workshop.care}</p>}
-                  <h4>Qué te llevás</h4><p>{workshop.outcome}</p>
-                  <h4>Formatos</h4><ul>{workshop.formats.map(format => <li key={format}>{format}</li>)}</ul>
-                </>}
-                {communication && <><h4>Resultado</h4><p>{communication.outcome}</p>{communication.note && <p className="communication-note">{communication.note}</p>}<h4>Modalidad</h4><p>{proposals.communicationMode}</p></>}
-                <BudgetLink/>
+                <ProposalDetails description={proposal.description} workshop={workshop} communication={communication}/>
               </div>
             </article>;
           })}

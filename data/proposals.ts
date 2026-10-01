@@ -96,7 +96,7 @@ export const proposals = {
   "communicationMode": "Consultoría o formación, según lo que necesites. El alcance y el acompañamiento se definen para cada proyecto.",
   "testimonials": [
     {
-      "quote": "Tu libro me resultó muy simple y llevadero de leer.",
+      "quote": "No es fácil bajar conceptos tan complejos al vocabulario cotidiano y creo que lo hiciste muy bien.",
       "context": "Sobre el libro Qué es la inteligencia artificial y cómo impacta en nuestras vidas."
     },
     {

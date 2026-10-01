@@ -166,3 +166,74 @@
 
 .signature-project-copy>.budget-link{max-width:100%;text-align:center}
 .signature-project-copy>.budget-link:hover,.signature-project-copy>.budget-link:focus-visible{color:#fff}
+/* Conversation-led introduction. */
+.conversation-hero{padding-top:42px;padding-bottom:64px}
+.conversation-hello{display:grid;grid-template-columns:minmax(0,1fr) 190px;gap:48px;align-items:center;max-width:1040px}
+.conversation-signature{font-size:14px;font-weight:650;color:#24547b}
+.conversation-signature>span,.conversation-start h2>span{color:#bd596a}
+.conversation-hello h1{font-family:Arial,Helvetica,sans-serif;font-size:clamp(39px,4.5vw,64px);font-weight:650;letter-spacing:-.05em;line-height:1.05;margin:18px 0 20px;max-width:790px}
+.conversation-hello h1 .typewriter-visual{display:inline-grid;width:100%;white-space:normal}
+.conversation-hello h1 .typewriter-reserve,.conversation-hello h1 .typewriter-animated{white-space:normal}
+.conversation-professions{display:flex;flex-wrap:wrap;align-items:baseline;font-size:18px;line-height:1.5;color:#24547b;font-weight:600;min-height:27px}
+.conversation-professions>span:first-child{color:#303639;font-weight:400}
+.conversation-portrait{position:relative;width:190px;aspect-ratio:1/1.12;margin:0;overflow:hidden}
+.conversation-portrait img{object-fit:cover;object-position:52% 20%}
+.conversation-intro{font-size:clamp(18px,1.65vw,23px);line-height:1.5;max-width:900px;margin:28px 0 30px;color:#303639}
+.conversation-start{max-width:1040px}
+.conversation-start h2{font-size:25px;line-height:1.2;letter-spacing:-.025em;margin:0 0 16px;font-weight:650}
+.conversation-entry{border-top:1px solid #cbd0d0}
+.conversation-entry:last-child{border-bottom:1px solid #cbd0d0}
+.conversation-entry h3{margin:0;font-size:inherit}
+.conversation-entry button{width:100%;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:17px 0;border:0;background:transparent;color:#24547b;font:inherit;font-size:21px;font-weight:650;text-align:left;cursor:pointer}
+.conversation-entry button>span{color:#bd596a;font-size:26px;line-height:1;flex-shrink:0}
+.conversation-entry button:hover{color:#193f5e}
+.conversation-entry button:focus-visible{outline:2px solid #24547b;outline-offset:4px}
+.conversation-answer{padding:0 0 24px}
+.conversation-answer p{font-size:17px;line-height:1.5;margin:0 0 18px;max-width:700px;color:#515a5e}
+.conversation-answer .budget-link{max-width:100%;text-align:center}
+/* Expanded details keep their natural height and normal page scrolling. */
+.proposal-full-details{padding:28px 0 8px;overflow:visible}
+.proposal-full-details .detail-block{margin:0 0 28px}
+.proposal-full-details h4{font-size:23px;font-weight:750;line-height:1.2;letter-spacing:-.025em;margin:0 0 14px;color:#202427}
+.proposal-full-details strong{font-weight:700;color:#202427}
+.proposal-full-details .detail-block>p:last-child{margin-bottom:0}
+.proposal-full-details .detail-result{background:#f8ecee;border-left:3px solid #bd596a;padding:24px}
+.proposal-full-details .detail-result h4{color:#9e4255}
+.proposal-full-details .detail-steps{list-style:none;counter-reset:detail-step;padding:0;margin:0}
+.proposal-full-details .detail-steps>li{position:relative;counter-increment:detail-step;padding:0 0 22px 42px;margin:0}
+.proposal-full-details .detail-steps>li:last-child{padding-bottom:0}
+.proposal-full-details .detail-steps>li::before{content:counter(detail-step,decimal-leading-zero);position:absolute;left:0;top:0;color:#9e4255;font-size:15px;font-weight:700}
+.proposal-full-details .detail-step-title{display:block;font-size:18px;line-height:1.4;margin-bottom:8px}
+.proposal-full-details .detail-steps p{margin:0}
+.proposal-full-details .detail-topics{padding-left:22px;margin:0}
+.proposal-full-details .detail-topics li::marker{color:#bd596a}
+.proposal-full-details .detail-care{margin:22px 0 0;padding-top:18px;border-top:1px solid #d8d8d2}
+.detail-format-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.detail-format{padding:18px;border:1px solid #cbd0d0}
+.detail-format h5{font-size:16px;font-weight:700;color:#24547b;line-height:1.4;margin:0 0 12px}
+.detail-format p{margin:0}
+.proposal-full-details .detail-modality{margin:16px 0 0}
+.detail-budget{padding-top:2px}
+.proposal-full-details .detail-budget .budget-link{margin:0}
+@media(max-width:700px){
+  .conversation-hero{padding-top:28px;padding-bottom:48px}
+  .conversation-hello{grid-template-columns:minmax(0,1fr) 90px;gap:16px;align-items:start}
+  .conversation-hello h1{font-size:clamp(29px,7.6vw,48px);line-height:1.08;margin:12px 0 14px}
+  .conversation-portrait{width:90px;margin-top:28px}
+  .conversation-signature{font-size:13px}
+  .conversation-professions{font-size:16px;min-height:48px}
+  .conversation-professions .typewriter-visual{max-width:100%;overflow-wrap:normal}
+  .conversation-intro{font-size:17px;line-height:1.5;margin:22px 0 26px}
+  .conversation-start h2{font-size:22px}
+  .conversation-entry button{font-size:18px;line-height:1.35;padding:16px 0;gap:12px}
+  .conversation-answer p{font-size:16px}
+  .proposal-full-details h4{font-size:22px}
+  .proposal-full-details .detail-result{padding:20px}
+  .detail-format-grid{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){
+  .conversation-professions .typewriter-reserve{display:none}
+  .conversation-professions .typewriter-animated{position:static}
+  .conversation-professions .typewriter-cursor{display:none}
+  .conversation-entry button,.conversation-answer .budget-link{transition:none}
+}

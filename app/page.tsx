@@ -1,19 +1,19 @@
 import Image from 'next/image';
-import { ArrowDownRight, ArrowUpRight } from 'lucide-react';
+import { ArrowDownRight } from 'lucide-react';
 import { portfolio } from '@/data/portfolio';
 import { Typewriter } from '@/components/ui/typewriter';
 import { Journey } from '@/components/Journey';
 import { SelectedWork } from '@/components/SelectedWork';
 import { WorkTogether } from '@/components/WorkTogether';
 import { PublicConversation } from '@/components/PublicConversation';
-import { ContactTitle } from '@/components/ContactTitle';
-import { SocialIconLinks } from '@/components/SocialIconLinks';
+import { ContactSection } from '@/components/ContactSection';
+import { SiteHeader } from '@/components/SiteHeader';
+import { SiteFooter } from '@/components/SiteFooter';
 
 export default function Home(){
   const p=portfolio;
   return <>
-    <a className="skip-link" href="#contenido">Saltar al contenido</a>
-    <header className="site-header"><div className="wrap header-inner"><a className="wordmark" href="#inicio" aria-label="Melisa Avolio, volver al inicio">MA<span>.</span></a><nav aria-label="Navegación principal">{p.navigation.map(item=><a key={item.href} href={item.href}>{item.label}</a>)}</nav><a className="header-contact" href="#contacto">Escribime <ArrowUpRight size={14}/></a></div></header>
+    <SiteHeader home/>
     <main id="contenido">
       <section className="hero wrap" id="inicio" aria-labelledby="hero-title">
         <div className="hero-copy">
@@ -29,7 +29,7 @@ export default function Home(){
       <WorkTogether/>
       <SelectedWork/>
       <PublicConversation/>
-      <section className="section contact" id="contacto" aria-labelledby="contact-title"><div className="wrap contact-layout"><div className="contact-content"><ContactTitle text={p.contact.heading}/><p>{p.contact.description}</p><a className="email-link" href={`mailto:${p.contact.email}`}>{p.contact.email}<ArrowUpRight size={26}/></a><SocialIconLinks/></div><div className="contact-mark" aria-hidden="true">MA<span>.</span></div></div></section>
-    </main><footer className="site-footer"><div className="wrap"><span>© 2026 MELISA AVOLIO</span><span>Este sitio fue hecho con <b className="footer-heart">♥</b> por Melisa Avolio.</span><a href="#inicio">Volver arriba ↑</a></div></footer>
+      <ContactSection/>
+    </main><SiteFooter/>
   </>;
 }

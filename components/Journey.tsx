@@ -10,7 +10,18 @@ export function Journey() {
   const [subtitleStarted, setSubtitleStarted] = useState(false);
   const [subtitleComplete, setSubtitleComplete] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
-  const subtitle = 'La historia que estoy escribiendo.';
+  const fragmentsRef = useRef<HTMLDivElement>(null);
+  const [frameHeight, setFrameHeight] = useState<number>();
+  const subtitle = journey.subtitle;
+
+  useEffect(() => {
+    const contents = fragmentsRef.current?.querySelectorAll<HTMLElement>('.about-fragment-content');
+    if (!contents?.length) return;
+    const measure = () => setFrameHeight(Math.ceil(Math.max(...Array.from(contents, content => content.getBoundingClientRect().height))));
+    const observer = new ResizeObserver(measure);
+    contents.forEach(content => observer.observe(content));
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     let frame = 0;
@@ -74,8 +85,7 @@ export function Journey() {
     };
   }, [subtitle]);
 
-  const labels = ['CONTAR', 'ENSEÑAR', 'EXPERIMENTAR'];
-  const emphasis = ['contar', 'entenderla', 'cambiar'];
+  const emphasis = ['Contar historias.', 'Muchas conversaciones.', 'Animarse a probar.'];
   const transitionProgress = (value: number, start: number, end: number) => {
     const normalized = Math.min(1, Math.max(0, (value - start) / (end - start)));
     return normalized * normalized * (3 - 2 * normalized);
@@ -96,13 +106,13 @@ export function Journey() {
   };
   return <section ref={sectionRef} className="section journey" id="recorrido" aria-labelledby="journey-title">
     <div className="about-story wrap">
-      <header className="about-heading"><h2 id="journey-title">Antes de seguir,<br/>te cuento algo<span aria-hidden="true">.</span></h2><p aria-label={subtitle}><span className="about-subtitle-visual" aria-hidden="true"><span className="about-subtitle-reserve">{subtitle}</span><span className="about-subtitle-animated">{subtitleText}{subtitleStarted && !subtitleComplete && <i>_</i>}</span></span></p></header>
-      <div className="about-fragments">
+      <header className="about-heading"><h2 id="journey-title">{journey.heading.slice(0, -1)}<span aria-hidden="true">.</span></h2><p aria-label={subtitle}><span className="about-subtitle-visual" aria-hidden="true"><span className="about-subtitle-reserve">{subtitle}</span><span className="about-subtitle-animated">{subtitleText}{subtitleStarted && !subtitleComplete && <i>_</i>}</span></span></p></header>
+      <div className="about-fragments" ref={fragmentsRef} style={{minHeight: frameHeight}}>
         {journey.moments.map((moment,index) => {
           const offset = index - narrativePosition;
           const opacity = Math.min(1, Math.max(0, 1 - Math.abs(offset) * .72));
           return <article key={moment.number} className="about-fragment" style={{transform:`translate3d(0, ${offset * 105}%, 0)`,opacity}}>
-          <span>{moment.number} / {labels[index]}</span><h3>{emphasize(moment.title, emphasis[index])}</h3><p>{moment.body}</p>
+          <div className="about-fragment-content"><span className="about-step-label">{moment.number} / {moment.label}</span><h3>{emphasize(moment.title, emphasis[index])}</h3>{moment.body.split('\n\n').map(paragraph => <p key={paragraph}>{paragraph}</p>)}</div>
           </article>;
         })}
       </div>

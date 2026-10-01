@@ -1,27 +1,28 @@
 import Image from 'next/image';
+import Link from 'next/link';
+import { proposals } from '@/data/proposals';
+import { BudgetLink } from '@/components/BudgetLink';
+import { Testimonials } from '@/components/Testimonials';
 
 const workAreas = [
   {
     id: 'charlas',
-    title: 'Charlas + capacitaciones',
-    lead: 'Para entender, conversar y aprender haciendo.',
-    description: 'Diseño charlas y experiencias de formación sobre inteligencia artificial, tecnología y cultura digital para organizaciones, equipos e instituciones educativas.',
+    href: '/propuestas#talleres',
+    action: 'Conocé los talleres',
     image: '/assets/ia-periodistas-horizontal.jpeg',
     alt: 'Melisa frente a una presentación de formación en inteligencia artificial para periodistas',
   },
   {
     id: 'comunicacion',
-    title: 'Comunicación + contenidos',
-    lead: 'Para contar la tecnología sin perder de vista a las personas.',
-    description: 'Desarrollo contenidos, estrategias y proyectos editoriales sobre tecnología, IA y cultura digital, combinando experiencia periodística, mirada crítica y lenguaje cercano.',
+    href: '/propuestas#comunicacion',
+    action: 'Conocé las propuestas',
     image: '/assets/nerdearla.jpeg',
     alt: 'Melisa durante una presentación en Nerdearla',
   },
   {
     id: 'ia-aplicada',
-    title: 'IA aplicada',
-    lead: 'Para pasar de “quiero usar IA” a entender dónde realmente aporta.',
-    description: 'Acompaño a personas y equipos a explorar herramientas y formas de incorporar IA en procesos de comunicación, contenidos y aprendizaje, combinando experimentación, criterio y control humano.',
+    href: null,
+    action: null,
     image: '/assets/formacion-aula.jpeg',
     alt: 'Melisa dicta una formación en la Universidad de Palermo',
   },
@@ -35,17 +36,27 @@ export function WorkTogether() {
         <p>Charlas, capacitaciones y proyectos para entender, comunicar y trabajar con tecnología e inteligencia artificial.</p>
       </header>
       <div className="collaboration-list">
-        {workAreas.map(area => <details className={`collaboration-area collaboration-area-${area.id}`} key={area.id}>
-          <summary>
+        {workAreas.map((area, index) => <article className={`collaboration-area collaboration-area-${area.id}`} key={area.id}>
+          <div className="collaboration-area-layout">
             <figure><Image src={area.image} alt={area.alt} fill sizes="(max-width: 700px) 100vw, 48vw" /></figure>
-            <div className="collaboration-copy"><h3>{area.title}</h3><p>{area.lead}</p><span className="collaboration-toggle" aria-hidden="true">+</span></div>
-          </summary>
-          <div className="collaboration-reveal"><p>{area.description}</p></div>
-        </details>)}
+            <div className="collaboration-copy">
+              <h3>{proposals.homeAreas[index].title}</h3><p>{proposals.homeAreas[index].text}</p>
+              {area.href ? <Link className="budget-link proposal-text-link" href={area.href}>{area.action} <span aria-hidden="true">→</span></Link> : <>
+                <details className="proposal-details talk-topics"><summary>Ver temas<span aria-hidden="true">+</span></summary><ul><li>Cultura digital.</li><li>Inteligencia artificial.</li><li>Comunicación.</li><li>Redes sociales.</li></ul></details>
+                <p className="talk-note">Podemos definir un tema y un enfoque según el público y el objetivo del encuentro.</p>
+                <BudgetLink/>
+              </>}
+            </div>
+          </div>
+        </article>)}
       </div>
-      <aside className="custom-invitation">
+      <Testimonials/>
+      <aside className="custom-invitation custom-invitation-compact">
         <h3>¿Tenés otra idea en mente?<span aria-hidden="true">.</span></h3>
-        <div><p>Contame qué necesitás. Podemos explorar una propuesta a medida, una colaboración o una forma de llevar estas conversaciones a tu comunidad</p><a href="#contacto">Contame tu idea <span aria-hidden="true">→</span></a></div>
+        <div className="invitation-copy">
+          <p>Contame qué necesitás. Podemos explorar una propuesta a medida, una colaboración o una forma de llevar estas conversaciones a tu comunidad</p>
+          <div className="invitation-actions"><a href="#contacto">Contame tu idea <span aria-hidden="true">→</span></a><BudgetLink/></div>
+        </div>
       </aside>
     </div>
   </section>;

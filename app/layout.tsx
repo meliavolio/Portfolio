@@ -3,6 +3,7 @@ import './globals.css';
 import './visual-v2.css';
 import './display-cards.css';
 import './editorial-pass.css';
+import './proposals.css';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://meliavolio.netlify.app'),

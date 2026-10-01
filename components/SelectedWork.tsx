@@ -62,7 +62,7 @@ export function SelectedWork() {
                   </div>
                 )}
 
-                <a href={project.href} target="_blank" rel="noreferrer">
+                <a className="budget-link" href={project.href} target="_blank" rel="noreferrer">
                   {project.cta} <span aria-hidden="true">→</span>
                 </a>
               </div>

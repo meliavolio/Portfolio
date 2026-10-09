@@ -1,3 +1,5 @@
+import { ui, type Locale } from '@/lib/i18n';
+
 type SocialNetwork = 'Instagram' | 'LinkedIn' | 'TikTok' | 'Threads' | 'X' | 'Linktree';
 
 const socialLinks: { network: SocialNetwork; href: string }[] = [
@@ -33,12 +35,12 @@ function SocialIcon({ network }: { network: SocialNetwork }) {
   return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.2 2h3.5l-7.6 8.7L23 22h-7l-5.5-7.2L4.2 22H.7L8.9 12.6.4 2h7.2l5 6.6L18.2 2Zm-1.3 18h1.9L6.5 3.9H4.4L16.9 20Z"/></svg>;
 }
 
-export function SocialIconLinks() {
+export function SocialIconLinks({ locale = 'es' }: { locale?: Locale }) {
   return (
-    <ul className="social-icon-links" aria-label="Redes sociales de Melisa Avolio">
+    <ul className="social-icon-links" aria-label={ui[locale].social}>
       {socialLinks.map(({ network, href }) => (
         <li key={network}>
-          <a href={href} target="_blank" rel="noopener noreferrer" aria-label={`${network} de Melisa Avolio`}>
+          <a href={href} target="_blank" rel="noopener noreferrer" aria-label={`${network} ${ui[locale].socialOf}`}>
             <SocialIcon network={network}/>
           </a>
         </li>

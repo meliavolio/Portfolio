@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { proposals } from '@/data/proposals';
+import { getProposals } from '@/lib/content';
+import { routes, ui, type Locale } from '@/lib/i18n';
 import { BudgetLink } from '@/components/BudgetLink';
 import { Testimonials } from '@/components/Testimonials';
 
@@ -28,34 +29,41 @@ const workAreas = [
   },
 ];
 
-export function WorkTogether() {
+export function WorkTogether({ locale = 'es' }: { locale?: Locale }) {
+  const proposals = getProposals(locale);
+  const text = ui[locale];
+  const areas = workAreas.map((area, index) => ({ ...area,
+    href: area.href ? `${routes[locale].proposals}${index === 0 ? '#talleres' : '#comunicacion'}` : null,
+    action: index === 0 ? text.workshopsAction : text.communicationAction,
+    alt: locale === 'es' ? area.alt : [ 'Melisa leading an AI training session for journalists', 'Melisa speaking at Nerdearla', 'Melisa teaching at the University of Palermo' ][index],
+  }));
   return <section className="section areas" aria-labelledby="areas-title">
     <div className="wrap">
       <header className="collaboration-intro">
-        <h2 id="areas-title">¿Cómo podemos trabajar en conjunto?<span aria-hidden="true">.</span></h2>
-        <p>Charlas, capacitaciones y proyectos para entender, comunicar y trabajar con tecnología e inteligencia artificial.</p>
+        <h2 id="areas-title">{text.collaboration}<span aria-hidden="true">.</span></h2>
+        <p>{text.collaborationIntro}</p>
       </header>
       <div className="collaboration-list">
-        {workAreas.map((area, index) => <article className={`collaboration-area collaboration-area-${area.id}`} key={area.id}>
+        {areas.map((area, index) => <article className={`collaboration-area collaboration-area-${area.id}`} key={area.id}>
           <div className="collaboration-area-layout">
             <figure><Image src={area.image} alt={area.alt} fill sizes="(max-width: 700px) 100vw, 48vw" /></figure>
             <div className="collaboration-copy">
               <h3>{proposals.homeAreas[index].title}</h3><p>{proposals.homeAreas[index].text}</p>
               {area.href ? <Link className="budget-link proposal-text-link" href={area.href}>{area.action} <span aria-hidden="true">→</span></Link> : <>
-                <details className="proposal-details talk-topics"><summary>Ver temas<span aria-hidden="true">+</span></summary><ul><li>Cultura digital.</li><li>Inteligencia artificial.</li><li>Comunicación.</li><li>Redes sociales.</li></ul></details>
-                <p className="talk-note">Podemos definir un tema y un enfoque según el público y el objetivo del encuentro.</p>
-                <BudgetLink/>
+                <details className="proposal-details talk-topics"><summary>{text.topics}<span aria-hidden="true">+</span></summary><ul>{text.talkTopics.map(topic => <li key={topic}>{topic}</li>)}</ul></details>
+                <p className="talk-note">{text.talkNote}</p>
+                <BudgetLink locale={locale}/>
               </>}
             </div>
           </div>
         </article>)}
       </div>
-      <Testimonials/>
+      <Testimonials locale={locale}/>
       <aside className="custom-invitation custom-invitation-compact">
-        <h3>¿Tenés otra idea en mente?<span aria-hidden="true">.</span></h3>
+        <h3>{text.custom}<span aria-hidden="true">.</span></h3>
         <div className="invitation-copy">
-          <p>Contame qué necesitás. Podemos explorar una propuesta a medida, una colaboración o una forma de llevar estas conversaciones a tu comunidad</p>
-          <div className="invitation-actions"><a href="#contacto">Contame tu idea <span aria-hidden="true">→</span></a><BudgetLink/></div>
+          <p>{text.customIntro}</p>
+          <div className="invitation-actions"><a href="#contacto">{text.customAction} <span aria-hidden="true">→</span></a><BudgetLink locale={locale}/></div>
         </div>
       </aside>
     </div>

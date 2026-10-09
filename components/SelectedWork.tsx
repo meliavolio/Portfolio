@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { ui, type Locale } from '@/lib/i18n';
 
 const projects = [
   {
@@ -27,22 +28,29 @@ const projects = [
   },
 ] as const;
 
-export function SelectedWork() {
+export function SelectedWork({ locale = 'es' }: { locale?: Locale }) {
+  const text = ui[locale];
+  const localizedProjects = projects.map(project => ({ ...project,
+    kicker: project.id === 'libro' ? text.bookKicker : text.newsletterKicker,
+    meta: project.id === 'libro' ? project.meta : text.newsletterMeta,
+    description: project.id === 'libro' ? text.bookDescription : text.newsletterDescription,
+    alt: project.id === 'libro' ? text.bookAlt : text.newsletterAlt,
+    cta: project.id === 'libro' ? text.bookAction : text.newsletterAction,
+  }));
   return (
     <section className="section selected-work" id="trabajo" aria-labelledby="work-title">
       <div className="wrap">
         <header className="signature-projects-intro">
           <h2 id="work-title">
-            Proyectos que llevan mi firma<span aria-hidden="true">.</span>
+            {text.selected}<span aria-hidden="true">.</span>
           </h2>
           <p>
-            Dos maneras de hacer algo que me acompaña desde siempre: observar la tecnología,
-            tratar de entenderla y encontrar una forma de contarla.
+            {text.selectedIntro}
           </p>
         </header>
 
         <div className="signature-projects">
-          {projects.map((project) => (
+          {localizedProjects.map((project) => (
             <article
               className={`signature-project signature-project-${project.id}`}
               key={project.id}
@@ -52,13 +60,15 @@ export function SelectedWork() {
                   <strong className="signature-project-kicker">{project.kicker}</strong>
                   <span className="signature-project-secondary-meta">{project.meta}</span>
                 </span>
-                <h3>{project.title}</h3>
+                <h3 lang={project.id === 'libro' ? 'es' : undefined}>{project.title}</h3>
+                {project.id === 'libro' && text.bookTranslation && <p className="language-note book-title-translation">{text.bookTranslation}</p>}
                 <p>{project.description}</p>
+                {(project.id === 'libro' ? text.spanishBook : text.spanishNewsletter) && <p className="language-note">{project.id === 'libro' ? text.spanishBook : text.spanishNewsletter}</p>}
 
                 {project.id === 'libro' && (
-                  <div className="book-sales" aria-label="Más de 4.000 ejemplares vendidos">
-                    <strong>+4.000</strong>
-                    <span>ejemplares vendidos</span>
+                  <div className="book-sales" aria-label={text.salesLabel}>
+                    <strong>{text.salesNumber}</strong>
+                    <span>{text.sales}</span>
                   </div>
                 )}
 

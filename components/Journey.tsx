@@ -1,10 +1,11 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { portfolio } from '@/data/portfolio';
+import { getPortfolio } from '@/lib/content';
+import { ui, type Locale } from '@/lib/i18n';
 
-export function Journey() {
-  const {journey} = portfolio;
+export function Journey({ locale = 'es' }: { locale?: Locale }) {
+  const {journey} = getPortfolio(locale);
   const [progress, setProgress] = useState(0);
   const [subtitleText, setSubtitleText] = useState('');
   const [subtitleStarted, setSubtitleStarted] = useState(false);
@@ -85,7 +86,7 @@ export function Journey() {
     };
   }, [subtitle]);
 
-  const emphasis = ['Contar historias.', 'Muchas conversaciones.', 'Animarse a probar.'];
+  const emphasis = ui[locale].emphasis;
   const transitionProgress = (value: number, start: number, end: number) => {
     const normalized = Math.min(1, Math.max(0, (value - start) / (end - start)));
     return normalized * normalized * (3 - 2 * normalized);

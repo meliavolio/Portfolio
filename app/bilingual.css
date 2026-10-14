@@ -1,8 +1,14 @@
 .header-actions{display:flex;align-items:center;gap:20px;flex-shrink:0}
-.language-switch{display:flex;align-items:center;gap:3px}
-.language-switch a{display:inline-flex;align-items:center;justify-content:center;min-width:36px;min-height:44px;font-size:12px;font-weight:600;border-radius:3px;color:var(--muted)}
-.language-switch a[aria-current="page"]{color:var(--ink);text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:6px;text-decoration-thickness:2px}
+.language-switch{display:flex;align-items:center;gap:3px;padding:3px;border:1px solid var(--line);border-radius:8px;background:#f4f1ee;flex-shrink:0}
+.language-switch a{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;font-size:14px;font-weight:600;border-radius:5px;color:#24547b}
 .language-switch a:hover{color:#24547b;background:var(--accent-pale)}
+.language-switch a[aria-current="page"]{color:#fff;background:#24547b}
+.language-switch a[aria-current="page"]:hover{background:#173d5f}
+.language-switch a:focus-visible{outline:2px solid #24547b;outline-offset:2px}
+.hero-copy>p{margin-bottom:24px}
+.hero .social-icon-links{flex-wrap:wrap;gap:8px;margin:0 0 24px}
+.hero .social-icon-links a{width:44px;height:44px;color:var(--hero-blue)}
+.hero .social-icon-links a:hover,.hero .social-icon-links a:focus-visible{color:var(--hero-coral)}
 .language-note{font-size:13px;line-height:1.5;color:var(--muted)}
 .signature-project-copy p.language-note{font-size:13px;line-height:1.5;margin-top:12px}
 .book-title-translation{font-style:italic}
@@ -11,5 +17,5 @@
 html[lang="en"] .hero-descriptor{flex-wrap:wrap;row-gap:3px}
 @media(prefers-reduced-motion:reduce){.hero-descriptor{white-space:normal;flex-wrap:wrap}.hero-descriptor .typewriter-visual,.hero-descriptor .typewriter-animated{white-space:normal}.hero-descriptor .typewriter-reserve,.hero-descriptor .typewriter-cursor{display:none}}
 @media(min-width:1001px) and (max-width:1280px){.header-inner{gap:14px}.site-header nav{gap:13px}.header-actions{gap:12px}.header-contact{display:none}.site-header nav a{font-size:12px}}
-@media(max-width:1000px){.header-actions{margin-left:auto}.language-switch a{min-width:40px}}
+@media(max-width:1000px){.header-actions{margin-left:auto}}
 @media(max-width:700px){.header-actions{gap:10px}.language-switch a{min-height:44px}.language-note{font-size:12px}}

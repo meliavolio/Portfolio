@@ -10,6 +10,7 @@ import { PublicConversation } from '@/components/PublicConversation';
 import { ContactSection } from '@/components/ContactSection';
 import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
+import { SocialIconLinks } from '@/components/SocialIconLinks';
 
 export function HomePage({ locale = 'es' }: { locale?: Locale }){
   const p = getPortfolio(locale);
@@ -19,10 +20,11 @@ export function HomePage({ locale = 'es' }: { locale?: Locale }){
     <main id="contenido">
       <section className="hero wrap" id="inicio" aria-labelledby="hero-title">
         <div className="hero-copy">
-          <span className="eyebrow hero-signature">{p.hero.eyebrow}<i aria-hidden="true">.</i></span>
+          <span className="eyebrow hero-signature">{p.hero.eyebrow}</span>
           <h1 id="hero-title"><span className="hero-greeting">{p.hero.greeting.slice(0,-1)}<i className="hero-title-period">.</i></span><span className="hero-name">{p.hero.name}</span></h1>
           <div className="hero-descriptor"><span>{text.descriptor}&nbsp;</span><Typewriter text={text.roles} speed={52} waitTime={2300} deleteSpeed={24} loop cursorChar="_" /></div>
           <p>{p.hero.intro}</p>
+          <SocialIconLinks locale={locale}/>
           <a className="text-link" href="#recorrido">{p.hero.scrollLabel}<ArrowDownRight size={19}/></a>
         </div>
         <figure className="hero-figure"><div className="hero-photo"><Image src={p.hero.photo.src} alt={p.hero.photo.alt} fill priority unoptimized sizes="(max-width: 700px) 92vw, (max-width: 1000px) 46vw, 590px" style={{objectPosition:p.hero.photo.position}} /></div></figure>
